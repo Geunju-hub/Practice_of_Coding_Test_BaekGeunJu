@@ -7,6 +7,7 @@
 #define MAX_EDGE 100000
 int dist[MAX_VERTEX + 1] = { 0, };
 int parent[MAX_VERTEX + 1] = { 0, };
+int res[100000 + 1] = { 0, }, cnt = 0;
 int N, M, s, e;
 
 typedef struct Vnode {
@@ -138,7 +139,7 @@ void DaijkstraShortestPaths_Algorithm() {
 			continue;
 		}
 		while (traverse != NULL) {
-			if (dist[traverse->vertex] >= dist[F] + traverse->weight) {
+			if (dist[traverse->vertex] > dist[F] + traverse->weight) {
 				dist[traverse->vertex] = dist[F] + traverse->weight;
 				parent[traverse->vertex] = F;
 				addHeap(traverse);
@@ -149,7 +150,6 @@ void DaijkstraShortestPaths_Algorithm() {
 	}
 	printf("%d\n", dist[e]);
 	int i = e;
-	int res[100000 + 1] = { 0, }, cnt = 0;
 	while (i != s) {
 		res[cnt++] = i;
 		i = parent[i];
